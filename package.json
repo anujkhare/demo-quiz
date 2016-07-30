@@ -29,6 +29,7 @@
   "author": "anujkhare",
   "license": "MIT",
   "dependencies": {
+    "redux-thunk": "2.1.0",
     "object-assign": "4.1.0",
     "react": "15.2.1",
     "react-dom": "15.2.1",

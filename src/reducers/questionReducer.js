@@ -1,32 +1,17 @@
 import * as types from '../constants/actionTypes';
-// import calculator from '../utils/fuelSavingsCalculator';
-// import dateHelper from '../utils/dateHelper';
-// import objectAssign from 'object-assign';
 
-const initialQuestionJson = '{ ' +
-'    "id": "demo-2", ' +
-'    "isFetching": false, ' +
-'    "str": "Which among the following were originally developed at Google?", ' +
-'    "correct": ["2"], ' +
-'    "opt": [{ ' +
-'      "uid": "demo-2a", ' +
-'      "str": "Go programming language" ' +
-'    }, { ' +
-'      "uid": "demo-2b", ' +
-'      "str": "Ruby" ' +
-'    }, { ' +
-'      "uid": "demo-2c", ' +
-'      "str": "Angular" ' +
-'    }, { ' +
-'      "uid": "demo-2d", ' +
-'      "str": "Rust" ' +
-'    }], ' +
-'    "positive": 5, ' +
-'    "negative": 5, ' +
-'    "tags": ["easy", "demo"] ' +
-'  }';
+const initialQuestion = {
+  id: '',
+  isFetching: false,
+  str: '',
+  correct: [],
+  opt: [],
+  positive: 0,
+  negative: 0,
+  tags: []
+};
 
-export default function question(state = JSON.parse(initialQuestionJson), action) {
+export default function question(state = initialQuestion, action) {
   switch (action.type) {
     case types.REQUEST_QUESTION:
       return Object.assign({}, state, {
@@ -76,3 +61,26 @@ export default function question(state = JSON.parse(initialQuestionJson), action
 // type: "RECEIVE_QUESTION",
 // question: JSON.parse('{"id": "demo-2", "str": "Which among the following were originally developed at Google?", "correct": ["demo-2a","demo-2c"], "opt": [ {"uid": "demo-2a","str": "Go programming language"}, {"uid": "demo-2b","str": "Ruby"}, {"uid": "demo-2c","str": "Angular"}, {"uid": "demo-2d","str": "Rust"} ], "positive": 5, "negative": 5, "tags": ["easy","demo"] }')
 // }
+//
+// const initialQuestionJson = '{ ' +
+// '    "id": "demo-2", ' +
+// '    "isFetching": false, ' +
+// '    "str": "Which among the following were originally developed at Google?", ' +
+// '    "correct": ["2"], ' +
+// '    "opt": [{ ' +
+// '      "uid": "demo-2a", ' +
+// '      "str": "Go programming language" ' +
+// '    }, { ' +
+// '      "uid": "demo-2b", ' +
+// '      "str": "Ruby" ' +
+// '    }, { ' +
+// '      "uid": "demo-2c", ' +
+// '      "str": "Angular" ' +
+// '    }, { ' +
+// '      "uid": "demo-2d", ' +
+// '      "str": "Rust" ' +
+// '    }], ' +
+// '    "positive": 5, ' +
+// '    "negative": 5, ' +
+// '    "tags": ["easy", "demo"] ' +
+// '  }';

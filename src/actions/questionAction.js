@@ -12,5 +12,3 @@ export function receiveQuestion(json) {
     question: JSON.parse(json)
   };
 }
-
-// export const RECEIVE_SCORE = 'RECEIVE_SCORE';
