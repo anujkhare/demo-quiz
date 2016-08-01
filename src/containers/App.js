@@ -11,6 +11,7 @@ class App extends Component {
     const {dispatch} = this.props;
     dispatch(getQuestionScore());
   }
+  
   render() {
     return (
       <div>

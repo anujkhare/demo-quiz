@@ -1,11 +1,11 @@
 import * as types from '../constants/actionTypes';
 
-const initialScoreJson = '{' +
-'    "lastScore": 0, ' +
-'    "totalScore": 0 ' +
-'  }';
+const initialScore = {
+  lastScore: undefined,
+  totalScore: undefined
+};
 
-export default function score(state = JSON.parse(initialScoreJson), action) {
+export default function score(state = initialScore, action) {
   switch (action.type) {
     case types.RECEIVE_SCORE:
       // the entire state has changed

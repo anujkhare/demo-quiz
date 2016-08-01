@@ -14,7 +14,6 @@ package main
 
 import (
 	"bytes"
-	// "time"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -24,6 +23,7 @@ import (
 	"os"
 	"sort"
 	"strconv"
+	"time"
 )
 
 type Option struct {
@@ -51,11 +51,19 @@ type QuesScore struct {
 	CurScore Score    `json:"score"`
 }
 
+type QuizTime struct {
+	TimeElapsed float64 `json: "time1"`
+	TimeLeft    float64 `json: "time2"`
+}
+
 const dataFile = "./quiz.json"
+
+const totalTime = time.Second * 60 * 2
 
 var questions []Question
 var curQuestionIndex int
 var score Score
+var startedAt time.Time
 
 func getQuestions() []Question {
 	// Stat the file, so we can find its current permissions
@@ -65,7 +73,7 @@ func getQuestions() []Question {
 		return nil
 	}
 
-	// Read the comments from the file.
+	// Read the questions from the file.
 	commentData, err := ioutil.ReadFile(dataFile)
 	if err != nil {
 		fmt.Printf("Unable to read the data file (%s): %s", dataFile, err)
@@ -74,7 +82,7 @@ func getQuestions() []Question {
 	// fmt.Printf("%s", commentData)
 	var questions []Question
 	if err := json.Unmarshal(commentData, &questions); err != nil {
-		fmt.Printf("Unable to Unmarshal comments from data file (%s): %s", dataFile, err)
+		fmt.Printf("Unable to Unmarshal questions from data file (%s): %s", dataFile, err)
 		return nil
 	}
 	return (questions)
@@ -142,10 +150,10 @@ func handleSubmit(w http.ResponseWriter, r *http.Request) {
 		quesScore := QuesScore{NextQues: questions[curQuestionIndex], CurScore: score}
 		quesScore.NextQues.Correct = []string{strconv.Itoa(len(quesScore.NextQues.Correct))}
 
-		// Marshal the comments to indented json.
+		// Marshal the questions to indented json.
 		quesScoreData, err := json.MarshalIndent(quesScore, "", "    ")
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Unable to marshal comments to json: %s", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Unable to marshal questions to json: %s", err), http.StatusInternalServerError)
 			return
 		}
 
@@ -161,15 +169,42 @@ func handleSubmit(w http.ResponseWriter, r *http.Request) {
 		}
 		quesScore := QuesScore{NextQues: questions[curQuestionIndex], CurScore: score}
 		quesScore.NextQues.Correct = []string{strconv.Itoa(len(quesScore.NextQues.Correct))}
-		// Marshal the comments to indented json.
+		// Marshal the questions to indented json.
 		quesScoreData, err := json.MarshalIndent(quesScore, "", "    ")
 		if err != nil {
-			http.Error(w, fmt.Sprintf("Unable to marshal comments to json: %s", err), http.StatusInternalServerError)
+			http.Error(w, fmt.Sprintf("Unable to marshal questions to json: %s", err), http.StatusInternalServerError)
 			return
 		}
 
 		// stream the contents of the file to the response
 		io.Copy(w, bytes.NewReader(quesScoreData))
+
+	default:
+		// Don't know the method, so error
+		http.Error(w, fmt.Sprintf("Unsupported method: %s", r.Method), http.StatusMethodNotAllowed)
+	}
+}
+
+func handleTime(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Cache-Control", "no-cache")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	switch r.Method {
+	case "GET":
+		fmt.Println("GET TIME!")
+		timeElapsed := time.Since(startedAt).Seconds()
+		quizTime := QuizTime{timeElapsed, float64(totalTime.Seconds()) - timeElapsed}
+		fmt.Println(quizTime)
+
+		// Marshal the time to indented json.
+		timeData, err := json.MarshalIndent(quizTime, "", "    ")
+		if err != nil {
+			http.Error(w, fmt.Sprintf("Unable to marshal time to json: %s", err), http.StatusInternalServerError)
+			return
+		}
+
+		// stream the contents of the file to the response
+		io.Copy(w, bytes.NewReader(timeData))
 
 	default:
 		// Don't know the method, so error
@@ -189,15 +224,9 @@ func main() {
 	// Initialize score
 	score = Score{0.0, 0.0}
 
-	toSend := &QuesScore{NextQues: questions[0], CurScore: score}
-	fmt.Println(toSend.NextQues)
-	fmt.Println(toSend.CurScore)
-	res, err := json.Marshal(toSend)
-	if err != nil {
-		fmt.Sprintf("Could not Marshal QuesScore: %s", err)
-	}
-	fmt.Println(string(res))
+	startedAt = time.Now()
 	http.HandleFunc("/api/answers", handleSubmit)
+	http.HandleFunc("/api/time", handleTime)
 
 	http.Handle("/", http.FileServer(http.Dir("./dist")))
 	log.Println("Server started: http://localhost:" + port)

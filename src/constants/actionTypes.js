@@ -11,4 +11,7 @@ export const RECEIVE_SCORE = 'RECEIVE_SCORE';
 export const SET_SELECTION = 'SET_SELECTION';
 export const TOGGLE_SELECTION_UID = 'TOGGLE_SELECTION_UID';
 
-export const INVALID = 'INVALID';
+// absolutely set time (used for sync with server)
+export const SET_TIME = 'SET_TIME';
+export const START_TIME = 'START_TIME';
+// export const STOP_TIME = 'STOP_TIME';

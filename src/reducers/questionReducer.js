@@ -1,13 +1,13 @@
 import * as types from '../constants/actionTypes';
 
 const initialQuestion = {
-  id: '',
+  id: undefined,
   isFetching: false,
-  str: '',
+  str: undefined,
   correct: [],
   opt: [],
-  positive: 0,
-  negative: 0,
+  positive: undefined,
+  negative: undefined,
   tags: []
 };
 
