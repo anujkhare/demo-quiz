@@ -12,7 +12,7 @@ const AboutPage = () => {
         The server is adapted from the <a href="https://facebook.github.io/react/docs/tutorial.html"> React tutorial </a>. It is very hacky, and there are a lot of things that can be made better!
       </p>
       <p>
-        Source is available on <a href="http://github.com/anujkhare"> Github </a>.
+        Source is available on <a href="http://github.com/anujkhare/demo-quiz"> Github </a>.
       </p>
       <p>
         All the user session information is maintained on the server, so you can close and resume with the same token if the session is still active.

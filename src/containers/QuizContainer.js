@@ -30,9 +30,6 @@ QuizContainer.PropTypes = proptypes;
   
 function mapStateToProps(state) {
   const {question, selection} = state;
-  console.log("QuizContainer!");
-  console.log(question);
-  console.log(selection);
   return {
     question: question,
     selection: selection

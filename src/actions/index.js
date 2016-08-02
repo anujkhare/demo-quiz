@@ -9,7 +9,6 @@ function updateState(quesScore) {
   return dispatch => {
     // separate the json into score and question json
     // Call dispatch to set new state
-    console.log("hereher");
     dispatch(action_selection.setSelection([]));
     dispatch(action_question.receiveQuestion(JSON.stringify(quesScore.question)));
     dispatch(action_score.receiveScore(JSON.stringify(quesScore.score)));
@@ -19,7 +18,6 @@ function updateState(quesScore) {
 // TODO: Do XMLHttpRequest without jQuery
 export function httpRequest(url, data='', type='GET'){
   return new Promise( (resolve, reject) => {
-    console.log(data);
     $.ajax({
       url: url,
       dataType: 'json',
@@ -27,12 +25,9 @@ export function httpRequest(url, data='', type='GET'){
       type: type,
       data: data,
       success: function(quesScore) {
-        console.log("Sucess!");
-        console.log(quesScore);
         resolve(quesScore);
       },
       error: function(xhr, status, err) {
-        console.log("failed!");
         reject(err);
       }
     });
@@ -44,12 +39,14 @@ export function getQuestionScore() {
     const {env} = getState();
     if (typeof env.token === 'undefined')
       return;
-    httpRequest('http://localhost:3002/api/answers',
+    httpRequest('/api/answers',
       JSON.stringify({token: env.token, type:'GET'}),
       'POST')
       .then(response => {
-        dispatch(updateState(response));
+        console.log("GET");
+        console.log(response);
         dispatch(setQuizStatus(response.Status));
+        dispatch(updateState(response));
       })
       .catch(err => {
         console.log(err);
@@ -68,15 +65,15 @@ export default function submitAndFetch() {
     const {env, selection} = getState();
     if (typeof env.token === 'undefined')
       return;
-    console.log(selection);
-    console.log("DONING IT NOW!");
     // FETCH THE QUESTOIN AND SCORE HERE!, using state
-    return httpRequest('http://localhost:3002/api/answers',
+    return httpRequest('/api/answers',
       JSON.stringify({token: env.token, Data: selection}),
       'POST')
             .then(response => {
-              dispatch(updateState(response));
+              console.log("THIS IS HERE!");
+              console.log(response);
               dispatch(setQuizStatus(response.Status));
+              dispatch(updateState(response));
             })
             .catch(err => {
               console.log(err);

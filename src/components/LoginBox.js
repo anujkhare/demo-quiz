@@ -11,19 +11,13 @@ class LoginBox extends Component {
     super(props);
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-    console.log("MOUNT");
-    console.log(this.props);
   }
   // componentDidMount() {
   //   this.onSubmit = this.onSubmit.bind(this);
-  //   console.log("MOUNT");
-  //   console.log(this.props);
   // }
 
   onChange(e) {
      const {dispatchSetToken} = this.props;
-     console.log("Token change!");
-     console.log(e.target.value);
      dispatchSetToken(e.target.value);
   }
     
@@ -33,7 +27,6 @@ class LoginBox extends Component {
      if (!env.token)
       return;
 
-     console.log("Validate Token!");
      authFromServer();
   }
 
