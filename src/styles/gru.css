@@ -1,0 +1,395 @@
+:root {
+  --color-base: rgb(221, 65, 36);
+  --background-grey: rgb(248, 249, 250);
+  --color-d2: rgb(176, 50, 28);
+}
+body {
+  background: #fff;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0;
+  padding: 30px;
+}
+
+a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-family: "Bitstream Vera Sans Mono", Consolas, Courier, monospace;
+  font-size: 12px;
+  margin: 0 2px;
+  padding: 0 5px;
+}
+
+h1, h2, h3, h4 {
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0;
+}
+
+h1, h2 {
+  color: var(--color-base);
+}
+
+h1 {
+  border-bottom: 1px solid #ddd;
+  font-size: 2.5em;
+}
+
+h2 {
+  border-bottom: 1px solid #eee;
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.2em;
+}
+
+p, ul {
+  margin: 15px 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* The navigation toolbar */
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+.navbar li {
+    float: left;
+    border-right:1px solid #bbb;
+		width: 24%;
+}
+
+.navbar li:last-child {
+    border-right: none;
+}
+
+
+.navbar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.navbar li a:hover:not(.active) {
+    background-color: #111;
+}
+
+.navbar .active {
+    background-color: #4CAF50;
+}
+
+/* For the topbar */
+.docked .header {
+    position: fixed;
+    backface-visibility: hidden;
+}
+.header {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center; /* Safari 7.0+ */
+    align-items: center;
+    left: 0;
+    z-index: 1000;
+    padding-top: 3px;
+    height: 50px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 1001;
+    background-color: var(--color-base);
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+}
+header {
+    margin-bottom: 15px;
+}
+
+/* The links in the navbar */
+.nav-links {
+    -webkit-flex: 1;
+    flex: 1;
+    margin-left: 5%;
+    margin-right: 5%;
+}
+.navPad {
+    -webkit-flex: 2;
+    flex: 2;
+}
+#nav-title {
+    -webkit-flex: 4;
+    flex: 4;
+}
+.nav-text {
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+.nav-text:hover {
+  text-decoration: none;
+}
+
+.footer {
+    left: 0;
+    z-index: 1000;
+    padding-top: 3px;
+    margin-top: 30px;
+    height: 150px;
+    width: 100%;
+    z-index: 1001;
+    background-color: var(--color-base);
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+}
+
+/* Set according to header size and status bar */
+#content {
+  margin-top: 115px;
+}
+
+.box {
+		display: block;
+		text-align: left;
+		padding: 2% 3%;
+}
+
+/* For the middle row of QuestionBox and ScoringBox */
+.flex-ques-score-container {
+    display: -webkit-flex;
+    display: flex;
+    height: 400px;
+    margin-left: 12%;
+    margin-right: 14%;
+    /* background-color: lightgrey; */
+}
+
+.infobox {
+    margin-left: 12%;
+    margin-right: 14%;
+    margin-top: 50px;
+}
+
+.login-box {
+    margin-top: 200px;
+    margin-left: 30%;
+    margin-right: 30%;
+    align-items: center;
+}
+
+/* For the first row of TimeBox and ScoreBox */
+#statusContainer {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center; /* Safari 7.0+ */
+    align-items: center;
+    left: 0;
+    height: 60px;
+    width: 100%;
+    position: absolute;
+    top: 62px;
+    z-index: 1001;
+    background-color: #fff;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,0.25);
+    justify-content: center;
+}
+
+#questionBox {
+  -webkit-flex: 3;
+  flex: 3;
+}
+
+/* inside flex-score-container */
+#lastScoreBox, #totalScoreBox, #timeLeftBox, #timeElapsedBox {
+  -webkit-flex: 1;
+  flex: 1;
+  padding-left: 5%;
+  text-align: center;
+}
+
+.statusPad {
+  -webkit-flex: 1;
+  flex: 1;
+}
+
+.box-status {
+		display: block;
+		text-align: left;
+		padding: 0.5% 2%;
+}
+
+/* The headings for status row */
+.status-heading {
+  color: var(--color-base);
+  font-weight: bold;
+}
+
+/* Answer row */
+.flex-answer-container {
+    display: -webkit-flex;
+    display: flex;
+    margin-left: 12%;
+    margin-right: 14%;
+    height: 350px;
+    background-color: lightgrey;
+    border: 1px solid #c2c7d0;
+    border-radius: 10px;
+    background-color: var(--background-grey);
+}
+
+/* Colors for the lastScore */
+.color-normal {
+    color: black;
+}
+.color-positive {
+    color: green;
+}
+.color-negative {
+    color: red;
+}
+
+/* Text box */
+input[type=text] {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border-radius: 4px;
+    margin-top: 25px;
+    margin-right: 15px;
+    width: 27%;
+}
+
+/* The buttons! */
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    margin-top: 25px;
+    margin-right: 15px;
+    width: 30%;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.btn-colored {
+    color: #fff;
+    background-color: var(--color-base);
+    border-color: #eea236;
+}
+
+.btn:hover {
+    box-shadow: 0 3px 5px 0 rgba(0,0,0,0.24),0 1px 3px 0 rgba(0,0,0,0.19);
+}
+
+.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Radio and checkboxes */
+/* Source: http://code.stephenmorley.org/html-and-css/styling-checkboxes-and-radio-buttons/ */
+.checkbox:not(old),
+.radio:not(old){
+  width     : 2em;
+  margin    : 0;
+  padding   : 0;
+  font-size : 1em;
+  opacity   : 0;
+}
+
+.checkbox:not(old) + label,
+.radio:not(old) + label{
+  display      : inline-block;
+  margin-left  : -2em;
+  line-height  : 1.5em;
+}
+
+input[type=checkbox]:not(old) + label > span,
+input[type=radio   ]:not(old) + label > span{
+  display          : inline-block;
+  width            : 0.875em;
+  height           : 0.875em;
+  margin           : 0.25em 0.5em 0.25em 0.25em;
+  border           : 0.0625em solid rgb(192,192,192);
+  border-radius    : 0.25em;
+  background       : rgb(224,224,224);
+  background-image :    -moz-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :     -ms-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :      -o-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image : -webkit-linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  background-image :         linear-gradient(rgb(240,240,240),rgb(224,224,224));
+  vertical-align   : bottom;
+}
+
+input[type=checkbox]:not(old):checked + label > span,
+input[type=radio   ]:not(old):checked + label > span{
+  background-image :    -moz-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :     -ms-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :      -o-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image : -webkit-linear-gradient(rgb(224,224,224),rgb(240,240,240));
+  background-image :         linear-gradient(rgb(224,224,224),rgb(240,240,240));
+}
+
+input[type=checkbox]:not(old):checked + label > span:before{
+  content     : '✓';
+  display     : block;
+  width       : 1em;
+  color       : var(--color-base);
+  font-size   : 0.875em;
+  line-height : 1em;
+  text-align  : center;
+  text-shadow : 0 0 0.0714em var(--color-d2);
+  font-weight : bold;
+}
+
+input[type=radio]:not(old):checked + label > span > span{
+  display          : block;
+  width            : 0.5em;
+  height           : 0.5em;
+  margin           : 0.125em;
+  border           : 0.0625em solid rgb(115,153,77);
+  border-radius    : 0.125em;
+  background       : rgb(153,204,102);
+  background-image :    -moz-linear-gradient(var(--color-d2), var(--color-base));
+  background-image :     -ms-linear-gradient(var(--color-d2), var(--color-base));
+  background-image :      -o-linear-gradient(var(--color-d2), var(--color-base));
+  background-image : -webkit-linear-gradient(var(--color-d2), var(--color-base));
+  background-image :         linear-gradient(var(--color-d2), var(--color-base));
+}
