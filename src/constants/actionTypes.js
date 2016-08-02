@@ -14,4 +14,9 @@ export const TOGGLE_SELECTION_UID = 'TOGGLE_SELECTION_UID';
 // absolutely set time (used for sync with server)
 export const SET_TIME = 'SET_TIME';
 export const START_TIME = 'START_TIME';
-// export const STOP_TIME = 'STOP_TIME';
+
+export const SET_TOKEN = 'SET_TOKEN';
+export const SET_QUIZ_STATUS = 'SET_QUIZ_STATUS';
+export const SET_IN_PROGRESS = 'SET_IN_PROGRESS';
+export const SET_FAILED = 'SET_FAILED';
+export const SET_SERVER_ERROR = 'SET_SERVER_ERROR';

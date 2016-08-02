@@ -18,7 +18,9 @@ class QuizContainer extends Component {
     return (
       <div>
         <QuestionBox {...this.props} />
-        <AnswerForm {...this.props} />
+        <div className="flex-answer-container">
+          <AnswerForm {...this.props} />
+        </div>
       </div>
     );
   }

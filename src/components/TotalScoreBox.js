@@ -10,7 +10,7 @@ const TotalScoreBox = ({totalScore}) => {
       <span className="status-heading">
         Total score <br/>
       </span>
-      <span className="totalScoreSpan">
+      <span className="statusText">
         {totalScore}
       </span>
     </div>

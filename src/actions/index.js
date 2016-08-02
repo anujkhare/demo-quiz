@@ -1,6 +1,7 @@
 import * as action_question from './questionAction';
 import * as action_selection from './selectionAction';
 import * as action_score from './scoreAction';
+import {setQuizStatus} from './envAction';
 
 // TODO: This is a temp API, you should either receive
 // the question and score separately, or change the reducers :P
@@ -39,10 +40,20 @@ export function httpRequest(url, data='', type='GET'){
 }
 
 export function getQuestionScore() {
-  return ((dispatch) => {
-    httpRequest('http://localhost:3002/api/answers')
-      .then(response => dispatch(updateState(response)))
-      .catch(err => console.log(err));
+  return ((dispatch, getState) => {
+    const {env} = getState();
+    if (typeof env.token === 'undefined')
+      return;
+    httpRequest('http://localhost:3002/api/answers',
+      JSON.stringify({token: env.token, type:'GET'}),
+      'POST')
+      .then(response => {
+        dispatch(updateState(response));
+        dispatch(setQuizStatus(response.Status));
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 }
 
@@ -54,12 +65,21 @@ export default function submitAndFetch() {
   return (dispatch, getState) => {
     dispatch(action_question.requestQuestion());
 
-    const { selection } = getState();
+    const {env, selection} = getState();
+    if (typeof env.token === 'undefined')
+      return;
     console.log(selection);
     console.log("DONING IT NOW!");
     // FETCH THE QUESTOIN AND SCORE HERE!, using state
-    return httpRequest('http://localhost:3002/api/answers', JSON.stringify(selection), 'POST')
-            .then(response => dispatch(updateState(response)))
-            .catch(err => console.log(err));
+    return httpRequest('http://localhost:3002/api/answers',
+      JSON.stringify({token: env.token, Data: selection}),
+      'POST')
+            .then(response => {
+              dispatch(updateState(response));
+              dispatch(setQuizStatus(response.Status));
+            })
+            .catch(err => {
+              console.log(err);
+            });
   };
 }

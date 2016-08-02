@@ -9,7 +9,7 @@ const LastScoreBox = ({lastScore}) => {
    if (lastScore < 0) {
      colorClass = "color-negative";
    } else if (lastScore == 0) {
-     colorClass = "color-normal";
+     colorClass = "statusText";
    }
 
    return (

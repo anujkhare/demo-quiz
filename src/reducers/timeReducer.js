@@ -18,6 +18,7 @@ export default function time(state = initialTime, action) {
         ...state,
         startedAt: action.startedAt
       };
+     
     default:
        return state;
   }

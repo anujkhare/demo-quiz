@@ -1,5 +1,6 @@
 import * as types from '../constants/actionTypes';
 import {httpRequest} from './index';
+// import {setQuizStatus} from './envAction';
 
 // time must have {timeLeft, timeElapsed}
 export function setTime(time) {
@@ -18,8 +19,14 @@ export function startTime() {
 }
 
 export function getTimeServer() {
-  return ((dispatch) => {
-    httpRequest('http://localhost:3002/api/time')
+  return ((dispatch, getState) => {
+    const {env} = getState();
+    if (typeof env.token === 'undefined')
+      return;
+    console.log(JSON.stringify({token: env.token}));
+    httpRequest('http://localhost:3002/api/time',
+                JSON.stringify({token: env.token}),
+                'POST')
       .then(response => {
         console.log("Hey there!");
         console.log(response);
@@ -27,8 +34,11 @@ export function getTimeServer() {
                           timeElapsed: response.TimeElapsed,
                           startedAt: new Date().getTime()
                           }));
+        // dispatch(setQuizStatus(response.Status));
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err);
+      });
   });
 }
 

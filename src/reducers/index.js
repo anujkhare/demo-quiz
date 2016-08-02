@@ -5,6 +5,7 @@ import question from './questionReducer';
 import score from './scoreReducer';
 import selection from './selectionReducer';
 import time from './timeReducer';
+import env from './envReducer';
 
 const rootReducer = combineReducers({
   question,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   selection,
   fuelSavings,
   time,
+  env,
   routing: routerReducer
 });
 

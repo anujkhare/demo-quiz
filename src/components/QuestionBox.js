@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
+import ScoringBox from './ScoringBox';
+
 const proptypes = {
   question: PropTypes.object.isRequired,
 };
@@ -10,29 +12,19 @@ class QuestionBox extends Component {
   }
 
   render() {
-    console.log("questionbox");
     const { question } = this.props;
     return (
-     <div>
-      <h2>
-       Question
-      </h2>
-      <div>
-        {(typeof question.id == 'undefined')? "Please wait while the question loads..": question.str}
+     <div className="flex-ques-score-container">
+      <div id="questionBox" className="box">
+        <h2>
+         Question
+        </h2>
+        <div>
+          {(typeof question.id == 'undefined')? "Please wait while the question loads..": question.str}
+        </div>
       </div>
 
-      <div id="scoringBox" className="box">
-        <h2> Scoring </h2>
-        <par>
-          Correct answer: <span className="color-positive"> +{question.positive} </span> <br />
-        </par>
-        <par>
-          Incorrect answer: <span className="color-negative"> -{question.negative} </span><br />
-        </par>
-        <par>
-          Skip question: <span className="color-normal"> 0.0 </span>
-        </par>
-      </div>
+      <ScoringBox positive={question.positive} negative={question.negative} />
      </div>
     );
   }

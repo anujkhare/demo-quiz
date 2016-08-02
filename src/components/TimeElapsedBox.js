@@ -7,7 +7,7 @@ const TimeElapsedBox = ({timeElapsed}) => {
       <span className="status-heading">
         Time Elapsed <br/>
       </span>
-      <span className="timeElapsedSpan">
+      <span className="statusText">
         {Math.trunc(timeElapsed / 60)}:{timeElapsed % 60}
       </span>
     </div>

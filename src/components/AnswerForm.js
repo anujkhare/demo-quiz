@@ -54,7 +54,7 @@ class AnswerForm extends Component {
     const handleChange = this.onSelectionChange;
     const numCorrect = question.correct[0];
     return (
-     <div>
+     <div className="answerBox box">
      <h2>
       Answer
      </h2>
@@ -64,11 +64,13 @@ class AnswerForm extends Component {
      <form className="answerForm" onSubmit={this.onSubmit}>
        <ul>
         {question.opt.map(option => {
+           let inputType = (numCorrect > 1)? "checkbox": "radio";
            return (
              <li key={option.uid}>
              <div className="option">
-               <input type={(numCorrect > 1)? "checkbox": "radio"}
+               <input type={inputType}
                       name="input_option"
+                      className={inputType}
                       value={option.uid}
                       checked={selection.indexOf(option.uid) != -1}
                       onChange={handleChange}
