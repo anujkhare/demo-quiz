@@ -19,6 +19,8 @@ class App extends Component {
   
   renderContent() {
     const {dispatch, env, children, score} = this.props;
+    console.log("APP RENDER");
+    console.log(env.quizStatus);
     switch(env.quizStatus) {
       case "InvalidToken":
         return (
@@ -27,7 +29,6 @@ class App extends Component {
         );
 
       case "OK":
-        console.log("OK!");
         return (
           <div>
             <StatusContainer />
@@ -38,7 +39,6 @@ class App extends Component {
         );
 
       case "QuizCompleted":
-        console.log("QUIZCOMPLETE!");
         return (
           <FinalPage totalScore={score.totalScore} />
         );

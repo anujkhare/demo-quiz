@@ -24,7 +24,7 @@ export function getTimeServer() {
     if (typeof env.token === 'undefined')
       return;
     console.log(JSON.stringify({token: env.token}));
-    httpRequest('http://localhost:3002/api/time',
+    httpRequest('/api/time',
                 JSON.stringify({token: env.token}),
                 'POST')
       .then(response => {

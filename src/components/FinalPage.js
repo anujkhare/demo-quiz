@@ -16,7 +16,7 @@ const FinalPage = ({totalScore}) => {
         Your final score was: {totalScore}
       </p>
       <p>
-        Source is available on <a href="http://github.com/anujkhare/gru-react"> Github </a>.
+        Source is available on <a href="http://github.com/anujkhare/demo-quiz"> Github </a>.
       </p>
       <p>
         Retake the quiz with any of "user1" ... "user20".

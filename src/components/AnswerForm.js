@@ -20,7 +20,6 @@ class AnswerForm extends Component {
 
   onSelectionChange(e) {
     const { dispatch, question } = this.props;
-    console.log(e.target.value);
     if (question.correct[0] > 1)
       dispatch(toggleSelectionOption(e.target.value));
     else
@@ -30,26 +29,21 @@ class AnswerForm extends Component {
   onSubmit(e) {
      const { dispatch } = this.props;
      e.preventDefault();
-     console.log(this.props.selection);
      if (!this.props.selection)   // must select at least one option
         return;
 
-     console.log("Submitting");
      dispatch(submitAndFetch());
   }
 
   onSkip(e) {
      const { dispatch } = this.props;
      e.preventDefault();
-     console.log("Skipping");
 
      dispatch(setSelection([]));  // set no selection (Skipping!)
-     console.log(this.props.selection);
      dispatch(submitAndFetch());
   }
 
   render() {
-    console.log("form");
     const { question, selection } = this.props;
     const handleChange = this.onSelectionChange;
     const numCorrect = question.correct[0];

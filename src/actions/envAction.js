@@ -9,6 +9,7 @@ export function setToken(token) {
 }
 
 export function setQuizStatus(quizStatus) {
+  console.log("Set Status!");
   return {
     type: types.SET_QUIZ_STATUS,
     quizStatus: quizStatus
@@ -44,7 +45,7 @@ export function authFromServer() {
       return;
 
     dispatch(setInProgress(true));
-    httpRequest('http://localhost:3002/api/auth',
+    httpRequest('/api/auth',
                 JSON.stringify({token: env.token}),
                 'POST')
       .then(response => {
