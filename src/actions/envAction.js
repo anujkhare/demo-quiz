@@ -44,7 +44,7 @@ export function authFromServer() {
       return;
 
     dispatch(setInProgress(true));
-    httpRequest('http://localhost:3002/api/auth',
+    httpRequest('/api/auth',
                 JSON.stringify({token: env.token}),
                 'POST')
       .then(response => {

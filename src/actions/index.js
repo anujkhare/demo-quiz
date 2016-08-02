@@ -44,7 +44,7 @@ export function getQuestionScore() {
     const {env} = getState();
     if (typeof env.token === 'undefined')
       return;
-    httpRequest('http://localhost:3002/api/answers',
+    httpRequest('/api/answers',
       JSON.stringify({token: env.token, type:'GET'}),
       'POST')
       .then(response => {
@@ -71,7 +71,7 @@ export default function submitAndFetch() {
     console.log(selection);
     console.log("DONING IT NOW!");
     // FETCH THE QUESTOIN AND SCORE HERE!, using state
-    return httpRequest('http://localhost:3002/api/answers',
+    return httpRequest('/api/answers',
       JSON.stringify({token: env.token, Data: selection}),
       'POST')
             .then(response => {
